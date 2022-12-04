@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import sharedStyles from "~/styles/shared.css";
+
 export const meta = () => ({
   charset: "utf-8",
   title: "Remix Expenses App",
@@ -28,4 +30,8 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export function links() {
+  return [{ rel: "stylesheet", href: sharedStyles }];
 }
