@@ -18,7 +18,8 @@
     "@remix-run/dev": "^1.8.0",
     "@remix-run/eslint-config": "^1.8.0",
     "@remix-run/serve": "^1.8.0",
-    "eslint": "^8.27.0"
+    "eslint": "^8.27.0",
+    "prisma": "^4.7.1"
   },
   "engines": {
     "node": ">=14"
