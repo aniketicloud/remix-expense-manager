@@ -1,4 +1,4 @@
-import { prisma } from "./database.server";
+import { prisma } from './database.server';
 
 export async function addExpense(expenseData) {
   try {
@@ -6,11 +6,11 @@ export async function addExpense(expenseData) {
       data: {
         title: expenseData.title,
         amount: +expenseData.amount,
-        date: new Date(expenseData.date)
-      }
+        date: new Date(expenseData.date),
+      },
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    throw error;
   }
-
 }
