@@ -1,7 +1,11 @@
-import { Link } from "@remix-run/react";
+import { Link, useActionData } from "@remix-run/react";
 
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
+
+  // this hook can be used called in either route or component
+  // this will return closest action (or loader) that was called for this component
+  const validationErrors = useActionData();
 
   return (
     <form method="post" className="form" id="expense-form">
@@ -27,6 +31,13 @@ function ExpenseForm() {
           <input type="date" id="date" name="date" max={today} required />
         </p>
       </div>
+      {validationErrors && (
+        <ul>
+          {Object.values(validationErrors).map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       <div className="form-actions">
         <button>Save Expense</button>
         <Link to="..">Cancel</Link>
