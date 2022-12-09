@@ -1,4 +1,5 @@
 import { Link, useActionData } from "@remix-run/react";
+// import { useSubmit } from "@remix-run/react";
 
 function ExpenseForm() {
   const today = new Date().toISOString().slice(0, 10); // yields something like 2023-09-10
@@ -6,9 +7,25 @@ function ExpenseForm() {
   // this hook can be used called in either route or component
   // this will return closest action (or loader) that was called for this component
   const validationErrors = useActionData();
+  // const submit = useSubmit()
+
+  // function submitHandler(event) {
+  //   event.preventDefault();
+  //   // perform your own validation
+  //   // ...
+  //   submit(event.target, {
+  //     // action: "/expenses/add",
+  //     method: "post",
+  //   });
+  // }
 
   return (
-    <form method="post" className="form" id="expense-form">
+    <form
+      method="post"
+      className="form"
+      id="expense-form"
+      // onSubmit={submitHandler}
+    >
       <p>
         <label htmlFor="title">Expense Title</label>
         <input type="text" id="title" name="title" required maxLength={30} />
