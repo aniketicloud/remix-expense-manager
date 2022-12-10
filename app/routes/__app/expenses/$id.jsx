@@ -42,3 +42,9 @@ export async function action({ params, request }) {
   await updateExpense(expenseId, expenseData);
   return redirect("/expenses");
 }
+
+// two actions: for update and delete
+// export function action(actionData) {
+//   console.log(actionData);
+//   return null;
+// }
