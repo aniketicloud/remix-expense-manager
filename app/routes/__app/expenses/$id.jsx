@@ -30,13 +30,15 @@ export default function UpdateExpensesPage() {
 
 export async function action({ params, request }) {
   const expenseId = params.id;
-  const formData = await request.formData;
+  const formData = await request.formData();
   const expenseData = Object.fromEntries(formData);
+
   try {
     validateExpenseInput(expenseData);
   } catch (error) {
     return error;
   }
+
   await updateExpense(expenseId, expenseData);
   return redirect("/expenses");
 }

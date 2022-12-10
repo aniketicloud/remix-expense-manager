@@ -43,10 +43,10 @@ export async function updateExpense(id, expenseData) {
         title: expenseData.title,
         amount: +expenseData.amount,
         date: new Date(expenseData.date),
-      }
-    })
+      },
+    });
   } catch (error) {
-    console.log(error)
-    throw error
+    console.log(error);
+    throw error;
   }
 }
