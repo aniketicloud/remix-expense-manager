@@ -1,9 +1,9 @@
 import { Link } from "@remix-run/react";
 
-function Logo() {
+function Logo({ label, link }) {
   return (
     <h1 id="logo">
-      <Link to="/">RemixExpenses</Link>
+      <Link to={link || "/"}>{label || "RemixExpenses"}</Link>
     </h1>
   );
 }
