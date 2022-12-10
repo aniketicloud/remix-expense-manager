@@ -3,6 +3,8 @@ import {
   Link,
   useActionData,
   useLoaderData,
+  useMatches,
+  useParams,
   useTransition as useNavigation,
 } from "@remix-run/react";
 // import { useSubmit } from "@remix-run/react";
@@ -14,7 +16,13 @@ function ExpenseForm() {
   // this will return closest action (or loader) that was called for this component
   const validationErrors = useActionData();
 
-  const expenseData = useLoaderData();
+  // const expenseData = useLoaderData();
+  const params = useParams();
+  const matches = useMatches();
+  const expenses = matches.find(
+    (match) => match.id === "routes/__app/expenses"
+  ).data;
+  const expenseData = expenses.find((expense) => expense.id === params.id); // params.id matches filename ($id.jsx)
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== "idle";
