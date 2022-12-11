@@ -53,7 +53,7 @@ function ExpenseForm() {
 
   return (
     <Form
-      method="post"
+      method={expenseData ? "patch" : "post"}
       className="form"
       id="expense-form"
       // onSubmit={submitHandler}
