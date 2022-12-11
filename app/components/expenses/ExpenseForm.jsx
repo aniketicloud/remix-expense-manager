@@ -27,6 +27,13 @@ function ExpenseForm() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state !== "idle";
 
+  if (params.id && !expenseData) {
+    // first approach: execute ErrorBoundary from closest(here root.jsx)
+    // throw new Error("Invalid expense id");
+
+    // second appraoch: show message on the Edit Expense modal
+    return <p>Invalid expense id</p>;
+  }
   const defaultValue = expenseData
     ? {
         title: expenseData.title,
