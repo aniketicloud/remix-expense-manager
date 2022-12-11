@@ -30,8 +30,7 @@ export async function getExpense(id) {
     const expense = await prisma.expense.findFirst({ where: { id } });
     return expense
   } catch (error) {
-    console.log(error)
-    throw error
+    throw new Error("Failed to get the expenses")
   }
 }
 
@@ -46,8 +45,8 @@ export async function updateExpense(id, expenseData) {
       },
     });
   } catch (error) {
-    console.log(error);
-    throw error;
+    throw new Error("Failed to update the expense")
+
   }
 }
 
@@ -55,7 +54,8 @@ export async function deleteExpense(id) {
   try {
     await prisma.expense.delete({ where: { id } })
   } catch (error) {
-    console.log(error);
-    throw error;
+    // sometimes we don't want to get the user to get error details
+    // as it might contain some data 
+    throw new Error("Failed to delete the expense")
   }
 }

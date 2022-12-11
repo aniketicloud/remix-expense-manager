@@ -72,7 +72,24 @@ export function CatchBoundary() {
   );
 }
 
-export function ErrorBoundary() {}
+// ErrorBoundary is rendered by `Remix`
+// when application gets some application error not error response
+// so we will not get error response but error object
+export function ErrorBoundary({ error }) {
+  const title = "An error occured";
+  return (
+    <Document title={title}>
+      <Error title={title}>
+        <p>
+          {error.message || "Something went wrong. Please try again later."}
+        </p>
+        <p>
+          Back to <Link to="/">Back to Safety</Link>
+        </p>
+      </Error>
+    </Document>
+  );
+}
 
 export function links() {
   return [{ rel: "stylesheet", href: sharedStyles }];
