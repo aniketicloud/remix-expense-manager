@@ -1,4 +1,4 @@
-import { hash } from "bcryptjs";
+import { compare, hash } from "bcryptjs";
 
 import { prisma } from "./database.server";
 
@@ -22,17 +22,23 @@ export async function signup({ email, password }) {
 }
 
 export async function login({ email, password }) {
+  // email verification
   const existingUser = await prisma.user.findFirst({ where: { email } });
+  !existingUser && throwCredentialsError();
 
-  if (!existingUser) {
-    const error = new Error(
-      "Could not log you in. Please check the provided credentials."
-    );
-
-    // http status code 401 is common indication of invalid authentication
-    error.status = 401;
-    throw error;
-  }
+  // password verification using bcryptjs.compare()
+  const passwordCorrect = await compare(password, existingUser.password);
+  !passwordCorrect && throwCredentialsError();
 
   // todo: create session cookie
+}
+
+function throwCredentialsError() {
+  const error = new Error(
+    "Could not log you in. Please check the provided credentials."
+  );
+
+  // http status code 401 is common indication of invalid authentication
+  error.status = 401;
+  throw error;
 }
