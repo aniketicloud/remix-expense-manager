@@ -25,11 +25,9 @@ export async function action({ request }) {
 
   try {
     if (authMode === "login") {
-      await login();
-      return null;
+      return await login(credentials);
     } else {
-      await signup(credentials);
-      return redirect("/expenses");
+      return await signup(credentials);
     }
   } catch (error) {
     if (error.status === 422) {
