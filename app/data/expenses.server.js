@@ -10,18 +10,17 @@ export async function addExpense(expenseData) {
       },
     });
   } catch (error) {
-    console.log(error);
-    throw error;
+    throw new Error("Failed to add the expense")
   }
 }
 
 export async function getExpenses() {
   try {
     const expenses = await prisma.expense.findMany({ orderBy: { date: "desc" } });
+
     return expenses
   } catch (error) {
-    console.log(error)
-    throw error
+    throw new Error("Failed to get the expenses")
   }
 }
 
