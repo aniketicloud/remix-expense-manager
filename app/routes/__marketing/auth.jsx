@@ -1,10 +1,7 @@
-import { redirect } from "@remix-run/node";
-
 import AuthForm from "~/components/auth/AuthForm";
-import { signup } from "~/data/auth.server";
+import { login, signup } from "~/data/auth.server";
 import { validateCredentials } from "~/data/validation.server";
 import authStyles from "~/styles/auth.css";
-import { login } from "../../data/auth.server";
 
 export default function AuthPage() {
   return <AuthForm />;
@@ -30,7 +27,7 @@ export async function action({ request }) {
       return await signup(credentials);
     }
   } catch (error) {
-    if (error.status === 422) {
+    if (error.status === 422 || error.status === 401) {
       return { credentials: error.message };
     }
   }
