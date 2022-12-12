@@ -1,3 +1,5 @@
+import { hash } from "bcryptjs";
+
 import { prisma } from "./database.server";
 
 export async function signup({ email, password }) {
@@ -12,6 +14,9 @@ export async function signup({ email, password }) {
     throw error;
   }
 
-  
-  
+  // never store password as plain text, it should be hashed first.
+  // prisma.user.create({ data: { email, password } }); // NOT GOOD
+
+  const passwordHash = await hash(password, 12);
+  await prisma.user.create({ data: { email, password: passwordHash } });
 }
