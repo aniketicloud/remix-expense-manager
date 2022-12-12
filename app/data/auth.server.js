@@ -20,3 +20,19 @@ export async function signup({ email, password }) {
   const passwordHash = await hash(password, 12);
   await prisma.user.create({ data: { email, password: passwordHash } });
 }
+
+export async function login({ email, password }) {
+  const existingUser = await prisma.user.findFirst({ where: { email } });
+
+  if (!existingUser) {
+    const error = new Error(
+      "Could not log you in. Please check the provided credentials."
+    );
+
+    // http status code 401 is common indication of invalid authentication
+    error.status = 401;
+    throw error;
+  }
+
+  // todo: create session cookie
+}

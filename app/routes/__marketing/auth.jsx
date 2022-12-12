@@ -4,6 +4,7 @@ import AuthForm from "~/components/auth/AuthForm";
 import { signup } from "~/data/auth.server";
 import { validateCredentials } from "~/data/validation.server";
 import authStyles from "~/styles/auth.css";
+import { login } from "../../data/auth.server";
 
 export default function AuthPage() {
   return <AuthForm />;
@@ -24,7 +25,8 @@ export async function action({ request }) {
 
   try {
     if (authMode === "login") {
-      // login logic
+      await login();
+      return null;
     } else {
       await signup(credentials);
       return redirect("/expenses");
