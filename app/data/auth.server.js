@@ -39,14 +39,22 @@ export async function getUserFromSession(request) {
 
 export async function destroyUserSession(request) {
   const session = await sessionStorage.getSession(
-    request.headers.get('Cookie')
+    request.headers.get("Cookie")
   );
 
-  return redirect('/', {
+  return redirect("/", {
     headers: {
-      'Set-Cookie': await sessionStorage.destroySession(session),
+      "Set-Cookie": await sessionStorage.destroySession(session),
     },
   });
+}
+
+export async function requireUserSession(request) {
+  const userId = await getUserFromSession(request);
+
+  if (!userId) {
+    throw redirect("/auth?mode=login");
+  }
 }
 
 export async function signup({ email, password }) {
