@@ -1,8 +1,11 @@
 // /expenses => shared layout
 
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
+
 import { FaDownload, FaPlus } from "react-icons/fa";
+
 import ExpensesList from "~/components/expenses/ExpensesList";
+
 import { requireUserSession } from "~/data/auth.server";
 import { getExpenses } from "~/data/expenses.server";
 
@@ -41,8 +44,8 @@ export default function ExpensesLayout() {
 }
 
 export async function loader({ request }) {
-  await requireUserSession(request);
-  const expenses = await getExpenses();
+  const userId = await requireUserSession(request);
+  const expenses = await getExpenses(userId);
 
   // json is remix utility funtion
   // here we can't throw an error response, as it will ...
