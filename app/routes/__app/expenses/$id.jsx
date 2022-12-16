@@ -58,7 +58,6 @@ export async function action({ params, request }) {
 // }
 
 export function meta({ data, location, params, parentsData }) {
-  console.log(parentsData);
   const expense = parentsData["routes/__app/expenses"].find(
     (expense) => expense.id == params.id
   );
