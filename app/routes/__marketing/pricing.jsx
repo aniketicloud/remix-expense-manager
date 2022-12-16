@@ -42,7 +42,7 @@ export default function PricingPage() {
 export function meta() {
   return {
     title: "Pricing",
-    description: "See our pricing plans",
+    description: "See our pricing plans.",
   };
 }
 
@@ -51,3 +51,5 @@ export function headers({ actionHeaders, loaderHeaders, parentHeaders }) {
     "Cache-Control": parentHeaders.get("Cache-Control"), // 60 minutes
   };
 }
+
+export const handle = { disableJS: true };

@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useMatches,
 } from "@remix-run/react";
 
 import sharedStyles from "~/styles/shared.css";
@@ -19,6 +20,9 @@ export const meta = () => ({
 });
 
 function Document({ title, children }) {
+  const matches = useMatches();
+  const disableJS = matches.some((match) => match.handle?.disableJS);
+
   return (
     <html lang="en">
       <head>
@@ -39,7 +43,7 @@ function Document({ title, children }) {
       <body>
         {children}
         <ScrollRestoration />
-        <Scripts />
+        {!disableJS && <Scripts />}
         <LiveReload />
       </body>
     </html>
@@ -60,15 +64,15 @@ export function CatchBoundary() {
   return (
     <Document title={caughtResponse.statusText}>
       <main>
-      <Error title={caughtResponse.statusText}>
-        <p>
-          {caughtResponse.data?.message ||
-            "Something went wrong. Please try again later."}
-        </p>
-        <p>
-          Back to <Link to="/">Back to Safety</Link>
-        </p>
-      </Error>
+        <Error title={caughtResponse.statusText}>
+          <p>
+            {caughtResponse.data?.message ||
+              "Something went wrong. Please try again later."}
+          </p>
+          <p>
+            Back to <Link to="/">Back to Safety</Link>
+          </p>
+        </Error>
       </main>
     </Document>
   );
@@ -82,14 +86,14 @@ export function ErrorBoundary({ error }) {
   return (
     <Document title={title}>
       <main>
-      <Error title={title}>
-        <p>
-          {error.message || "Something went wrong. Please try again later."}
-        </p>
-        <p>
-          Back to <Link to="/">Back to Safety</Link>
-        </p>
-      </Error>
+        <Error title={title}>
+          <p>
+            {error.message || "Something went wrong. Please try again later."}
+          </p>
+          <p>
+            Back to <Link to="/">Back to Safety</Link>
+          </p>
+        </Error>
       </main>
     </Document>
   );
