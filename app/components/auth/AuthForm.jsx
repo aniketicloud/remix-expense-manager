@@ -13,6 +13,7 @@ function AuthForm() {
   const validationErrors = useActionData();
 
   const isSubmitting = navigation.state !== "idle";
+  const isReloading = navigation.state === "loading";
 
   const authMode = searchParams.get("mode") || "login";
   const submitBtnCaption = authMode === "login" ? "Login" : "Create User";
@@ -41,7 +42,9 @@ function AuthForm() {
       )}
       <div className="form-actions">
         <button disabled={isSubmitting}>
-          {isSubmitting ? "Authenticating..." : submitBtnCaption}
+          {isSubmitting && !isReloading
+            ? "Authenticating..."
+            : submitBtnCaption}
         </button>
         <Link to={authMode === "login" ? "?mode=signup" : "?mode=login"}>
           {toggleBtnCaption}
