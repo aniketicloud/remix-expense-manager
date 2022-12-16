@@ -49,12 +49,12 @@ export default function Index() {
 export function meta() {
   return {
     title: "RemixExpenses - The Complete App",
-    description: "Manage your expenses with ease",
+    description: "Manage your expenses with ease.",
   };
 }
 
-export function headers() {
+export function headers({ actionHeaders, loaderHeaders, parentHeaders }) {
   return {
-    "Cache-Control": "max-age=3600", // 60 minutes
+    "Cache-Control": parentHeaders.get("Cache-Control"), // 60 minutes
   };
 }

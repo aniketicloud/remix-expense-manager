@@ -59,6 +59,7 @@ export function CatchBoundary() {
 
   return (
     <Document title={caughtResponse.statusText}>
+      <main>
       <Error title={caughtResponse.statusText}>
         <p>
           {caughtResponse.data?.message ||
@@ -68,6 +69,7 @@ export function CatchBoundary() {
           Back to <Link to="/">Back to Safety</Link>
         </p>
       </Error>
+      </main>
     </Document>
   );
 }
@@ -79,6 +81,7 @@ export function ErrorBoundary({ error }) {
   const title = "An error occured";
   return (
     <Document title={title}>
+      <main>
       <Error title={title}>
         <p>
           {error.message || "Something went wrong. Please try again later."}
@@ -87,6 +90,7 @@ export function ErrorBoundary({ error }) {
           Back to <Link to="/">Back to Safety</Link>
         </p>
       </Error>
+      </main>
     </Document>
   );
 }

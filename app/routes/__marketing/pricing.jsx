@@ -45,3 +45,9 @@ export function meta() {
     description: "See our pricing plans",
   };
 }
+
+export function headers({ actionHeaders, loaderHeaders, parentHeaders }) {
+  return {
+    "Cache-Control": parentHeaders.get("Cache-Control"), // 60 minutes
+  };
+}
