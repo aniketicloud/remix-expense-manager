@@ -1,5 +1,6 @@
 // /expenses => shared layout
 
+import { json } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 
 import { FaDownload, FaPlus } from "react-icons/fa";
@@ -63,7 +64,15 @@ export async function loader({ request }) {
   //   return expenses;
   // }
 
-  return expenses;
+  // return expenses;
+
+  // !! this is to add headers in all requests.
+  // !! like then page is client side and next expenses are fetched
+  return json(expenses, {
+    headers: {
+      "Cache-Control": "max-age=3",
+    },
+  });
 }
 
 // instead of getting the root catch boundary we can define our own.
@@ -71,3 +80,10 @@ export async function loader({ request }) {
 // export function CatchBoundary({ error }) {
 //   return <p>Error</p>;
 // }
+
+// !! this is page reload headers
+export function headers({ parentHeaders, loaderHeaders, actionHeaders }) {
+  return {
+    "Cache-Control": loaderHeaders.get("Cache-Control"), // 3 seconds
+  };
+}
