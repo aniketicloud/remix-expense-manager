@@ -52,3 +52,9 @@ export function meta() {
     description: "Manage your expenses with ease",
   };
 }
+
+export function headers() {
+  return {
+    "Cache-Control": "max-age=3600", // 60 minutes
+  };
+}
