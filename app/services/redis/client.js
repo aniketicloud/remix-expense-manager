@@ -1,4 +1,4 @@
-import { createClient } from "redis";
+import { createClient, RedisClientType } from "redis";
 
 const redisOpts = {
   socket: {
@@ -8,6 +8,9 @@ const redisOpts = {
   password: process.env.REDIS_PW,
 };
 
+/**
+ * @type RedisClientType
+ */
 let redis;
 
 if (process.env.NODE_ENV === "production") {
