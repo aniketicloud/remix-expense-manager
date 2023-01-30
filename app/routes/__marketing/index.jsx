@@ -12,7 +12,7 @@ export default function Index() {
         <div className="marketing-content">
           <div className="marketing-image">
             <img
-              src="images/expenses-management.jpg"
+              src="images/expenses-management.webp"
               alt="A list of expenses."
             />
           </div>
@@ -38,7 +38,7 @@ export default function Index() {
             patterns.
           </p>
           <div className="marketing-image">
-            <img src="images/expenses-chart.jpg" alt="A demo bar chart." />
+            <img src="images/expenses-chart.webp" alt="A demo bar chart." />
           </div>
         </div>
       </section>
